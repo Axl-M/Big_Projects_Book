@@ -28,4 +28,24 @@ CLUBS = chr(9827) # Символ 9827 — '♣'.
 # (Список кодов chr можно найти в https://inventwithpython.com/charactermap)
 BACKSIDE = 'backside'
 
-print(HEARTS)
+def main():
+    print(rules)
+    money = 5000
+    while True: # основной цикл программы
+        if money <= 0: # деньги закончились
+            print('Вы проиграли!')
+            print('Хорошо что вы не играли на настоящие деньги.')
+            print('Благодарю за игру!')
+            sys.exit()
+        # Игрок делает ставку на раунд
+        print('Денег:', money)
+        bet = getBet(money)
+
+
+def getBet(maxBet):
+    print('stavka')
+
+if __name__ == '__main__':
+    main()
+        
+    
