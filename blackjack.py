@@ -40,10 +40,25 @@ def main():
         # Игрок делает ставку на раунд
         print('Денег:', money)
         bet = getBet(money)
+        print(bet)
 
 
 def getBet(maxBet):
-    print('stavka')
+    '''Спрашиваем сколько игрок ставит на этот раунд'''
+    while True:      # спрашиваем пока не будет введено корректное значение
+        print(f'Сколько вы ставите? 1-{maxBet}, или Q-выход')
+        # print('Сколько вы ставите? (1-{}, или Q-выход)'.format(maxBet))
+        bet = input('> ').upper().strip()
+        if bet == 'Q':
+            print('Благодарю за игру!')
+            sys.exit()
+        if not bet.isdecimal():
+            continue    # игрок не ответил - спрашиваем снова
+        bet = int(bet)
+        if 1 <= bet <= maxBet:
+            return bet
+
+        
 
 if __name__ == '__main__':
     main()
