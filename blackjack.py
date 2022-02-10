@@ -40,7 +40,10 @@ def main():
         # Игрок делает ставку на раунд
         print('Денег:', money)
         bet = getBet(money)
-        print(bet)
+
+        # сдаём диллеру и игроку по 2 карты из колоды
+        deck = getDeck()
+
 
 
 def getBet(maxBet):
@@ -58,7 +61,16 @@ def getBet(maxBet):
         if 1 <= bet <= maxBet:
             return bet
 
-        
+def getDeck():
+    '''Возвращает список кортежей (номинал, масть) для всех 52 карт.'''
+    deck = []
+    for suit in (HEARTS, SPADES, DIAMONDS, CLUBS):
+        for rank in range(2, 11):
+            deck.append((str(rank), suit))          # добавить числовые карты
+        for rank in ('В', 'Д', 'К', 'Т'):
+            deck.append((rank, suit))               # добавить фигурные карты
+    random.shuffle(deck)
+    return deck
 
 if __name__ == '__main__':
     main()
