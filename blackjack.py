@@ -205,6 +205,26 @@ def displayCards(cards):
 
 
 def getMove(playerHand, money):
+    '''Спарашиваем какой ход хочет сделать игрок
+    возвращает Н - если хочет взять ещё карту
+    S - если хватит
+    D - если удваивает'''
+    while True:  # пока игрок не сделает допустимый ход
+        # определить какие ходы может сделать игрок
+        moves = ['(H)it, (S)tand']
+
+        # игрок может удвоить при первом ходе (это ясно из того что у него ровно 2 карты)
+        if len(playerHand) == 2 and money > 0:
+            moves.append('(D)ouble down')
+
+        # получаем ход игрока
+        movePrompt = ', '.join(moves) + '> '
+        move = input(movePrompt).upper()
+        if move in ('H', 'S'):
+            return move     # сделан допустимый ход
+        if move == 'D' and '(D)ouble down' in moves:
+            return move     # сделан допустимый ход
+
     pass
 
 if __name__ == '__main__':
