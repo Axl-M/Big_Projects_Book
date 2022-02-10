@@ -56,6 +56,61 @@ def main():
             if getHandValue(playerHand) > 21:
                 break
 
+            # получить ход игрока: H, S или D
+            move = getMove(playerHand, money - bet)
+
+            # обработка действий игрока
+            if move == 'D':
+                # игрок удваивает, он может увеличить ставку
+                additionalBet = getBet(min(bet, (money - bet)))
+                bet += additionalBet
+                print(f'Ставка увеличена на {bet}')
+                print('Ставка:', bet)
+            if move in ('H', 'D'):
+                # если "ЕЩЁ" или ЭУДВАИВАЮ" игрок берет еще одну карту
+                newCard = deck.pop()
+                rank, suit = newCard
+                print(f'Ваша карта {rank} {suit}')
+                playerHand.append(newCard)
+                if getHandValue(playerHand) > 21:
+                    # у игрока ПЕРЕБОР
+                    continue
+            if move in ('S', 'D'):
+                # ХВАТИТ или УДВАИВАЮ - переход хода другому игроку
+                break
+
+            # обработка действий ДИЛЕРА
+            if getHandValue(playerHand) <= 21:
+                while getHandValue(dealerHand) < 17:
+                    # дилер берет ещё карту
+                    print('КОМПЬЮТЕР делает ход - берет карту.')
+                    dealerHand.append(deck.pop())
+                    displayHands(playerHand, dealerHand, False)
+                    if getHandValue(dealerHand) > 21:
+                        break  # перебор
+                    input('Нажмите ENTER чтобы продолжить...')
+                    print('\n\n')
+
+            # отобразить итоговые карты на руках
+            displayHands(playerHand, dealerHand, True)
+
+            playerValue = getHandValue(playerHand)
+            dealerValue = getHandValue(dealerHand)
+            # проверка ВЫИГРАЛ ПРОИГРАЛ или НИЧЬЯ
+            if dealerValue > 21:
+                print(f'Вы выиграли $ {bet}')
+                money += bet
+            elif (playerValue > 21) or (playerValue < dealerValue):
+                print('Вы проиграли!')
+                money -= bet
+            elif playerValue > dealerValue:
+                print(f'Вы выиграли $ {bet}')
+                money += bet
+            elif playerValue == dealerValue:
+                print("Ничья! Ставка возвращена.")
+
+            input('Нажмите ENTER для продолжения...')
+            print('\n\n')
 
 
 
@@ -149,6 +204,8 @@ def displayCards(cards):
         print(row)
 
 
+def getMove(playerHand, money):
+    pass
 
 if __name__ == '__main__':
     main()
