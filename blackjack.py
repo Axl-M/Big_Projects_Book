@@ -49,6 +49,12 @@ def main():
         # отработка действий игрока
         print('Ставка:', bet)
         while True:     # выполнять пока игрок не скажет "ХВАТИТ" или не будет перебор
+            displayHands(playerHand, dealerHand, False)
+            print()
+
+            # проверка на перебор у игрока
+            if getHandValue(playerHand) > 21:
+                break
 
 
 
