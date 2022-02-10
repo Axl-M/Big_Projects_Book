@@ -43,7 +43,12 @@ def main():
 
         # сдаём диллеру и игроку по 2 карты из колоды
         deck = getDeck()
+        dealerHand = [deck.pop(), deck.pop()]
+        playerHand = [deck.pop(), deck.pop()]
 
+
+        print(dealerHand)
+        print(playerHand)
 
 
 def getBet(maxBet):
