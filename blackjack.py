@@ -46,9 +46,11 @@ def main():
         dealerHand = [deck.pop(), deck.pop()]
         playerHand = [deck.pop(), deck.pop()]
 
+        # отработка действий игрока
+        print('Ставка:', bet)
+        while True:     # выполнять пока игрок не скажет "ХВАТИТ" или не будет перебор
 
-        print(dealerHand)
-        print(playerHand)
+
 
 
 def getBet(maxBet):
@@ -66,6 +68,7 @@ def getBet(maxBet):
         if 1 <= bet <= maxBet:
             return bet
 
+
 def getDeck():
     '''Возвращает список кортежей (номинал, масть) для всех 52 карт.'''
     deck = []
@@ -77,7 +80,70 @@ def getDeck():
     random.shuffle(deck)
     return deck
 
+
+def displayHands(playerHand, dealerHand, showDealerHand):
+    '''отображает карты дилера и игрока. Скрыть первую карту дилера если showDealerHand = False'''
+    print()
+    if showDealerHand:
+        print('КОМПЬЮТЕР:', getHandValue(dealerHand))
+        displayCards(dealerHand)
+    else:
+        print('КОМПЬЮТЕР: ???')
+        # скрыть первую карту дилера
+        displayCards([BACKSIDE] + dealerHand[1:])
+
+    # показать карты игрока
+    print('ИГРОК:', getHandValue(playerHand))
+    displayCards(playerHand)
+
+
+def getHandValue(cards):
+    '''Возвращает стоимость карт '''
+    value = 0
+    numberOfAces = 0
+
+    # добавить стоимость карты (не туза)
+    for card in cards:
+        rank = card[0]  # взять из кортежа номинал
+        if rank == 'Т':
+            numberOfAces += 1
+        elif rank in ('В', 'Д', 'К', 'Т'):
+            value += 10                     # для фигурных карт
+        else:
+            value += int(rank)              # для числовых карт
+
+    # добавить стоимость для тузов
+    value += numberOfAces
+    for i in range(numberOfAces):
+        if value + 10 <= 21:                # если не перебор ТУЗ = 11
+            value += 10
+
+    return value
+
+
+def displayCards(cards):
+    '''Отображает все карты из списка карт'''
+    rows = ['', '', '', '', '']         # отоброжаемый в каждой строке текст
+
+    for i, card in enumerate(cards):
+        rows[0] += ' ___ '      # верхняя строка карты
+        if card == BACKSIDE:    # рубашка карты
+            rows[1] +=  '|## | '
+            rows[2] +=  '|###| '
+            rows[3] +=  '|_##| '
+        else:
+            # вывод лицевой стороны карты
+            rank, suit = card       # карта -кортеж
+            rows[1] += '|{} | '.format(rank.ljust(2))
+            rows[2] += '| {} | '.format(suit)
+            rows[3] += '|_{}| '.format(rank.rjust(2, '_'))
+
+    # вывести строки на экран
+    for row in rows:
+        print(row)
+
+
+
 if __name__ == '__main__':
     main()
-        
-    
+
