@@ -187,7 +187,7 @@ def displayCards(cards):
     rows = ['', '', '', '', '']         # отоброжаемый в каждой строке текст
 
     for i, card in enumerate(cards):
-        rows[0] += ' ___ '      # верхняя строка карты
+        rows[0] += ' ___  '      # верхняя строка карты
         if card == BACKSIDE:    # рубашка карты
             rows[1] +=  '|## | '
             rows[2] +=  '|###| '
