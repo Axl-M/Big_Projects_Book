@@ -46,3 +46,31 @@ message = input('> ')
 message = message.upper()
 
 translated = ''  # хранит сообщение
+
+# шифруем / расшифровываем каждый символ сообщения
+for symbol in message:
+    if symbol in SYMBOLS:
+        num = SYMBOLS.find(symbol)  # получить числовое значение символа
+        if mode == 'encrypt':
+            num = num + ekey
+        elif mode == 'decrypt':
+            num = num - key
+    # переход по кругу если число больше длины SYMBOLS или меньше 0
+        if num >= len(SYMBOLS):
+            num = num - len(SYMBOLS)
+        elif num < 0:
+            num = num + len(SYMBOLS)
+    # добавить соответствующий числу символ в translated
+        translated += SYMBOLS[num]
+    else:
+        # просто добавить символ без шифровки
+        translated += symbol
+
+# вывод строки на экран
+print(translated)
+
+try:
+    pyperclip.copy(translated)
+    print('Текст скопирован в буфер обмена.')
+except:
+    pass  # если pyperclip не установлен - ничего не делать
