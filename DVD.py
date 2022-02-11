@@ -10,15 +10,16 @@ except ImportError:
     print('Эта программа требует установленного модуля bext. \n Можно установить командой pip3 install bext')
 
 # задаем константы
-WIDTH, HEIGHT = bext.size()
+WIDTH, HEIGHT = bext.size()  # возвращает кортеж (широта, высота)
 # WIDTH, HEIGHT = 10, 5
 # print(WIDTH, HEIGHT)
 # в Windows нельзя вывести символ в последний столбец без дообавления
 # автоматически символа новой строки, поэтому уменьшаем нирину на 1
 # WIDTH -= 1
-NUMBER_OF_LOGOS = 50
+NUMBER_OF_LOGOS = 5
 PAUSE_AMOUNT = 0.1
 COLORS = ['red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white']
+# COLORS = ['random']
 UP_RIGHT = 'ur'
 UP_LEFT = 'ul'
 DOWN_RIGHT = 'dr'
@@ -33,7 +34,7 @@ DIR = 'direction'
 
 
 def main():
-    bext.clear()
+    bext.clear()  # удалить текст с экрана / очистить экран
 
     # генерация логотипов
     logos = []
@@ -41,8 +42,8 @@ def main():
         logos.append({COLOR: random.choice(COLORS),
                     X: random.randint(1, WIDTH - 4),
                     Y: random.randint(1, HEIGHT - 4),
-                    # DIR: random.choice(DIRECTION)})
-                    DIR: DOWN_RIGHT})   # вся стая летит в одном направлении
+                    DIR: random.choice(DIRECTION)})
+                    # DIR: DOWN_RIGHT})   # вся стая летит в одном направлении
         if logos[-1][X] % 2 == 1:
             # гарантируем что Х четное число, для столкновения с углом
             logos[-1][X] -= 1
@@ -50,12 +51,12 @@ def main():
     cornerBounces = 0  # посчитать сколько раз логотип столкнулся с углом
     while True:  # основной цикл программы
         for logo in logos:  # обработка всех логотипов в списке
-            bext.goto(logo[X], logo[Y])
-            print('    ', end='')
+            bext.goto(logo[X], logo[Y])         # переместить курсор в координаты
+            print('   ', end='')                # стереть
 
             originalDirection = logo[DIR]
 
-            # проверка, не отскакивает ли логотип от угла
+            # проверка, не отскакивает ли логотип от угла /  смена направления (DIR)
             if logo[X] == 0 and logo[Y] == 0:
                 logo[DIR] = DOWN_RIGHT
                 cornerBounces += 1
@@ -121,11 +122,11 @@ def main():
             # отрисовать логотип на новом месте
             bext.goto(logo[X], logo[Y])
             bext.fg(logo[COLOR])
-            print('AxL', end='')
+            print('AxL', end='')        # логотип менять здесь!!!
 
         bext.goto(0, 0)
 
-        sys.stdout.flush()      # необходимо для программ при использовании bext
+        sys.stdout.flush()      # необходимо для программ при использовании bext / сбросить буфер
         time.sleep((PAUSE_AMOUNT))
 
 
