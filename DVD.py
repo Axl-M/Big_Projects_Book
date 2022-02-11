@@ -11,12 +11,13 @@ except ImportError:
 
 # задаем константы
 WIDTH, HEIGHT = bext.size()
+# WIDTH, HEIGHT = 10, 5
 # print(WIDTH, HEIGHT)
 # в Windows нельзя вывести символ в последний столбец без дообавления
 # автоматически символа новой строки, поэтому уменьшаем нирину на 1
 # WIDTH -= 1
-NUMBER_OF_LOGOS = 5
-PAUSE_AMOUNT = 0.2
+NUMBER_OF_LOGOS = 50
+PAUSE_AMOUNT = 0.1
 COLORS = ['red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white']
 UP_RIGHT = 'ur'
 UP_LEFT = 'ul'
@@ -40,7 +41,8 @@ def main():
         logos.append({COLOR: random.choice(COLORS),
                     X: random.randint(1, WIDTH - 4),
                     Y: random.randint(1, HEIGHT - 4),
-                    DIR: random.choice(DIRECTION)})
+                    # DIR: random.choice(DIRECTION)})
+                    DIR: DOWN_RIGHT})   # вся стая летит в одном направлении
         if logos[-1][X] % 2 == 1:
             # гарантируем что Х четное число, для столкновения с углом
             logos[-1][X] -= 1
@@ -119,7 +121,7 @@ def main():
             # отрисовать логотип на новом месте
             bext.goto(logo[X], logo[Y])
             bext.fg(logo[COLOR])
-            print('DVD', end='')
+            print('AxL', end='')
 
         bext.goto(0, 0)
 
