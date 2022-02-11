@@ -96,6 +96,19 @@ def main():
                 # поменять цвет при отскакивании логотипа
                 logo[COLOR] = random.choice(COLORS)
 
+            # перемещение логотипа ( Х меняется на 2 так как в терминале высота символов в 2 раза больше ширины
+            if logo[DIR] == UP_RIGHT:
+                logo[X] += 2
+                logo[Y] -= 1
+            elif logo[DIR] == UP_LEFT:
+                logo[X] -= 2
+                logo[Y] -= 1
+            elif logo[DIR] == DOWN_RIGHT:
+                logo[X] += 2
+                logo[Y] += 1
+            elif logo[DIR] == DOWN_LEFT:
+                logo[X] -= 2
+                logo[Y] += 1
 
 
 
