@@ -53,7 +53,7 @@ def main():
             print()
 
             # проверка на перебор у игрока
-            if getHandValue(playerHand) > 21:   # ОПЯТЬ получаем сумму очков! зачем?
+            if getHandValue(playerHand) > 21:   # ОПЯТЬ получаем сумму очков
                 break
 
             # получить ход игрока: H, S или D
@@ -67,7 +67,7 @@ def main():
                 print(f'Ставка увеличена на {bet}')
                 print('Ставка:', bet)
             if move in ('H', 'D'):
-                # если "ЕЩЁ" или ЭУДВАИВАЮ" игрок берет еще одну карту
+                # если "ЕЩЁ" или "УДВАИВАЮ" игрок берет еще одну карту
                 newCard = deck.pop()
                 rank, suit = newCard
                 print(f'Ваша карта {rank} {suit}')
@@ -80,8 +80,8 @@ def main():
                 break
 
         # обработка действий ДИЛЕРА
-        if getHandValue(playerHand) <= 21:
-            while getHandValue(dealerHand) < 17:
+        if getHandValue(playerHand) <= 21:      # получить стоимость карт и проверить
+            while getHandValue(dealerHand) < 17:    # комп берет карты пока очков < 17
                 # дилер берет ещё карту
                 print('КОМПЬЮТЕР делает ход - берет карту.')
                 dealerHand.append(deck.pop())
@@ -211,18 +211,18 @@ def getMove(playerHand, money):
     D - если удваивает'''
     while True:  # пока игрок не сделает допустимый ход
         # определить какие ходы может сделать игрок
-        moves = ['(H)it, (S)tand']  # сделать перевод!!!!
+        moves = ['(H) - ещё карту, (S) - Пас']  # сделать перевод!!!!
 
         # игрок может удвоить при первом ходе (это ясно из того что у него ровно 2 карты)
         if len(playerHand) == 2 and money > 0:
-            moves.append('(D)ouble down')
+            moves.append('(D) - Повышаю')
 
         # получаем ход игрока
         movePrompt = ', '.join(moves) + '> '
         move = input(movePrompt).upper()
         if move in ('H', 'S'):
             return move     # сделан допустимый ход
-        if move == 'D' and '(D)ouble down' in moves:
+        if move == 'D' and '(D) - Повышаю' in moves:
             return move     # сделан допустимый ход
 
     pass
