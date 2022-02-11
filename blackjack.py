@@ -49,11 +49,11 @@ def main():
         # отработка действий игрока
         print('Ставка:', bet)
         while True:     # выполнять пока игрок не скажет "ХВАТИТ" или не будет перебор
-            displayHands(playerHand, dealerHand, False)
+            displayHands(playerHand, dealerHand, False)         # вывести карты дилера и игрока
             print()
 
             # проверка на перебор у игрока
-            if getHandValue(playerHand) > 21:
+            if getHandValue(playerHand) > 21:   # ОПЯТЬ получаем сумму очков! зачем?
                 break
 
             # получить ход игрока: H, S или D
@@ -79,45 +79,45 @@ def main():
                 # ХВАТИТ или УДВАИВАЮ - переход хода другому игроку
                 break
 
-            # обработка действий ДИЛЕРА
-            if getHandValue(playerHand) <= 21:
-                while getHandValue(dealerHand) < 17:
-                    # дилер берет ещё карту
-                    print('КОМПЬЮТЕР делает ход - берет карту.')
-                    dealerHand.append(deck.pop())
-                    displayHands(playerHand, dealerHand, False)
-                    if getHandValue(dealerHand) > 21:
-                        break  # перебор
-                    input('Нажмите ENTER чтобы продолжить...')
-                    print('\n\n')
+        # обработка действий ДИЛЕРА
+        if getHandValue(playerHand) <= 21:
+            while getHandValue(dealerHand) < 17:
+                # дилер берет ещё карту
+                print('КОМПЬЮТЕР делает ход - берет карту.')
+                dealerHand.append(deck.pop())
+                displayHands(playerHand, dealerHand, False)
+                if getHandValue(dealerHand) > 21:
+                    break  # перебор
+                input('Нажмите ENTER чтобы продолжить...')
+                print('\n\n')
 
-            # отобразить итоговые карты на руках
-            displayHands(playerHand, dealerHand, True)
+        # отобразить итоговые карты на руках
+        displayHands(playerHand, dealerHand, True)
 
-            playerValue = getHandValue(playerHand)
-            dealerValue = getHandValue(dealerHand)
-            # проверка ВЫИГРАЛ ПРОИГРАЛ или НИЧЬЯ
-            if dealerValue > 21:
-                print(f'Вы выиграли $ {bet}')
-                money += bet
-            elif (playerValue > 21) or (playerValue < dealerValue):
-                print('Вы проиграли!')
-                money -= bet
-            elif playerValue > dealerValue:
-                print(f'Вы выиграли $ {bet}')
-                money += bet
-            elif playerValue == dealerValue:
-                print("Ничья! Ставка возвращена.")
+        playerValue = getHandValue(playerHand)
+        dealerValue = getHandValue(dealerHand)
+        # проверка ВЫИГРАЛ ПРОИГРАЛ или НИЧЬЯ
+        if dealerValue > 21:
+            print(f'Вы выиграли $ {bet}')
+            money += bet
+        elif (playerValue > 21) or (playerValue < dealerValue):
+            print('Вы проиграли!')
+            money -= bet
+        elif playerValue > dealerValue:
+            print(f'Вы выиграли $ {bet}')
+            money += bet
+        elif playerValue == dealerValue:
+            print("Ничья! Ставка возвращена.")
 
-            input('Нажмите ENTER для продолжения...')
-            print('\n\n')
+        input('Нажмите ENTER для продолжения...')
+        print('\n\n')
 
 
 
 def getBet(maxBet):
     '''Спрашиваем сколько игрок ставит на этот раунд'''
     while True:      # спрашиваем пока не будет введено корректное значение
-        print(f'Сколько вы ставите? 1-{maxBet}, или Q-выход')
+        print(f'Сколько вы ставите?  Или Q-выход')
         # print('Сколько вы ставите? (1-{}, или Q-выход)'.format(maxBet))
         bet = input('> ').upper().strip()
         if bet == 'Q':
@@ -154,7 +154,7 @@ def displayHands(playerHand, dealerHand, showDealerHand):
         displayCards([BACKSIDE] + dealerHand[1:])
 
     # показать карты игрока
-    print('ИГРОК:', getHandValue(playerHand))
+    print('ИГРОК:', getHandValue(playerHand))       # вывести  к-во очков у игрока
     displayCards(playerHand)
 
 
@@ -211,7 +211,7 @@ def getMove(playerHand, money):
     D - если удваивает'''
     while True:  # пока игрок не сделает допустимый ход
         # определить какие ходы может сделать игрок
-        moves = ['(H)it, (S)tand']
+        moves = ['(H)it, (S)tand']  # сделать перевод!!!!
 
         # игрок может удвоить при первом ходе (это ясно из того что у него ровно 2 карты)
         if len(playerHand) == 2 and money > 0:
