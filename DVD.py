@@ -14,7 +14,7 @@ WIDTH, HEIGHT = bext.size()
 # print(WIDTH, HEIGHT)
 # в Windows нельзя вывести символ в последний столбец без дообавления
 # автоматически символа новой строки, поэтому уменьшаем нирину на 1
-WIDTH -= 1
+# WIDTH -= 1
 NUMBER_OF_LOGOS = 5
 PAUSE_AMOUNT = 0.2
 COLORS = ['red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white']
@@ -49,7 +49,7 @@ def main():
     while True:  # основной цикл программы
         for logo in logos:  # обработка всех логотипов в списке
             bext.goto(logo[X], logo[Y])
-            print('   ', end='')
+            print('    ', end='')
 
             originalDirection = logo[DIR]
 
@@ -58,7 +58,7 @@ def main():
                 logo[DIR] = DOWN_RIGHT
                 cornerBounces += 1
             elif logo[X] == 0 and logo[Y] == HEIGHT - 1:
-                logo[DIR] == UP_RIGHT
+                logo[DIR] = UP_RIGHT
                 cornerBounces += 1
             elif logo[X] == WIDTH - 3 and logo[Y] == 0:
                 logo[DIR] = DOWN_LEFT
@@ -69,28 +69,28 @@ def main():
 
             # если логотип отскакивает от левого края
             elif logo[X] == 0 and logo[DIR] == UP_LEFT:
-                logo[DIR] == UP_RIGHT
+                logo[DIR] = UP_RIGHT
             elif logo[X] == 0 and logo[DIR] == DOWN_LEFT:
-                logo[DIR] == DOWN_RIGHT
+                logo[DIR] = DOWN_RIGHT
 
             # если отскакивает от правого края
             # WIDTH - 3 так как DVD состоит из 3 букв
             elif logo[X] == WIDTH - 3 and logo[DIR] == UP_RIGHT:
-                logo[DIR] == UP_LEFT
+                logo[DIR] = UP_LEFT
             elif logo[X] == WIDTH - 3 and logo[DIR] == DOWN_RIGHT:
-                logo[DIR] == DOWN_LEFT
+                logo[DIR] = DOWN_LEFT
 
             # если логотип отскакивает от верхнего края
             elif logo[Y] == 0 and logo[DIR] == UP_LEFT:
-                logo[DIR] == DOWN_LEFT
+                logo[DIR] = DOWN_LEFT
             elif logo[Y] == 0 and logo[DIR] == UP_RIGHT:
-                logo[DIR] == DOWN_RIGHT
+                logo[DIR] = DOWN_RIGHT
 
             # если лого отскакивает от нижнего края
             elif logo[Y] == HEIGHT - 1 and logo[DIR] == DOWN_LEFT:
-                logo[DIR] == UP_LEFT
+                logo[DIR] = UP_LEFT
             elif logo[Y] == HEIGHT - 1 and logo[DIR] == DOWN_RIGHT:
-                logo[DIR] == UP_RIGHT
+                logo[DIR] = UP_RIGHT
 
             if logo[DIR] != originalDirection:
                 # поменять цвет при отскакивании логотипа
