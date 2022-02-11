@@ -110,6 +110,21 @@ def main():
                 logo[X] -= 2
                 logo[Y] += 1
 
+        # отобразить количество отскакиваний от углов
+        bext.goto(5, 0)
+        bext.fg('white')
+        print("Отскоков от углов: ", cornerBounces, end='')
+
+        for logo in logos:
+            # отрисовать логотип на новом месте
+            bext.goto(logo[X], logo[Y])
+            bext.fg(logo[COLOR])
+            print('DVD', end='')
+
+        bext.goto(0, 0)
+
+        sys.stdout.flush()      # необходимо для программ при использовании bext
+        time.sleep((PAUSE_AMOUNT))
 
 
     # print(logos)
