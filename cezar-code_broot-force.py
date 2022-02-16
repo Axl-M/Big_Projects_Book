@@ -15,8 +15,23 @@ message = input('> ')
 # Должно совпадать с набором символов использовавшимися при шифровании
 SYMBOLS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЬЫЪЭЮЯ'
 
-for key in range(len(SYMBOLS)):     #в цикле проходим по всем возможным ключам
+for key in range(len(SYMBOLS)):     # в цикле проходим по всем возможным ключам
     translated = ''
 
     # расшифровка каждого символа в сообщении
-    
+    for symbol in message:
+        if symbol in SYMBOLS:
+            num = SYMBOLS.find(symbol)  # получить числовое значение символа
+            num = num - key  # расшифровка числового значения
+
+            # переход по кругу если число меньше 0
+            if num < 0:
+                num = num + len(SYMBOLS)
+                # добавляем расшифрованый символ в translated
+                translated += SYMBOLS[num]
+            else:
+                # просто добавить символ без расшифровки
+                translated = symbol
+
+    # вывести ключ и его расшифровку
+    print(f'Ключ #{key}: {translated}')
