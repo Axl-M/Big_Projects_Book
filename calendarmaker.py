@@ -30,4 +30,15 @@ while True:
         break
     print('Введите номер месяца от 1 до 12.')
 
-    
+def getCalendarFor(year, month):
+    calText = ''    # содержит строковое значение с календарем
+    # Поместить меcяц и год вверху календаря
+    calText += (' ' * 34) + MONTH[month - 1] + ' ' + str(year) + '\n'
+    # добавить метки дней недели
+    calText += ' Понедельник   Втрорник   Среда    Четверг   Пятница   Суббота   Воскресенье   \n'
+
+    return calText
+
+
+calText = getCalendarFor(year, month)
+print(calText)
