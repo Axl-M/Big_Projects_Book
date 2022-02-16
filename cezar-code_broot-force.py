@@ -27,11 +27,11 @@ for key in range(len(SYMBOLS)):     # в цикле проходим по все
             # переход по кругу если число меньше 0
             if num < 0:
                 num = num + len(SYMBOLS)
-                # добавляем расшифрованый символ в translated
-                translated += SYMBOLS[num]
-            else:
-                # просто добавить символ без расшифровки
-                translated = symbol
+            # добавляем расшифрованый символ в translated
+            translated = translated + SYMBOLS[num]
+        else:
+            # просто добавить символ без расшифровки
+            translated = translated + symbol
 
     # вывести ключ и его расшифровку
     print(f'Ключ #{key}: {translated}')

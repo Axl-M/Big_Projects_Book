@@ -32,12 +32,12 @@ while True:
     print('Нужно выбрать (е) или (d)')
 
 while True:     # ввести ключ шифрования
-     maxKey = len(SYMBOLS) - 1
-     print(f'Введите ключ ( от 0 до {maxKey})')
-     response = input('> ').upper()
-     if not response.isdecimal():
-         continue
-     if 0 <= int(response) < len(SYMBOLS):
+    maxKey = len(SYMBOLS) - 1
+    print(f'Введите ключ ( от 0 до {maxKey})')
+    response = input('> ').upper()
+    if not response.isdecimal():
+        continue
+    if 0 <= int(response) < len(SYMBOLS):
         key = int(response)
         break
 
