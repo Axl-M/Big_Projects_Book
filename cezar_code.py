@@ -7,12 +7,14 @@ B — в E, C — в F и т. д. Для расшифровки сообщени
 ПРОГРАММА КАК ШИФРУЕТ ТАК И РАСШИФРОВЫВАЕТ ЗАКОДИРОВАННЫЙ ТЕКСТ'''
 
 try:
-    import  pyperclip   # для копирования текста в буфер обмена
+    import pyperclip   # для копирования текста в буфер обмена
 except ImportError:
     pass    # если библиотека не установлена - ничего не делать
 
 # все возможные символы для шифрования
-SYMBOLS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+# SYMBOLS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+# SYMBOLS = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЬЫЪЭЮЯ'
+SYMBOLS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЬЫЪЭЮЯ'
 
 # print(len(SYMBOLS))
 print(resume)
@@ -52,7 +54,7 @@ for symbol in message:
     if symbol in SYMBOLS:
         num = SYMBOLS.find(symbol)  # получить числовое значение символа
         if mode == 'encrypt':
-            num = num + ekey
+            num = num + key
         elif mode == 'decrypt':
             num = num - key
     # переход по кругу если число больше длины SYMBOLS или меньше 0
