@@ -44,7 +44,8 @@ def getCalendarFor(year, month):
     currentDate = datetime.date(year, month, 1)
     # отнимаем от currentDate по дню пока не дойдем до воскресенья
     # weekday() для воскресенья возвращает 6 а не 0
-    while currentDate.weekday() != 6:
+    # while currentDate.weekday() != 6:
+    while currentDate.weekday() != 0:  # так как неделя начинается с ПН ( это у буржуев с ВС)
         currentDate -= datetime.timedelta(days=1)
 
     while True:  # проходим по всем неделям в месяце
