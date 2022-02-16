@@ -44,7 +44,7 @@ def getCalendarFor(year, month):
     currentDate = datetime.date(year, month, 1)
     # отнимаем от currentDate по дню пока не дойдем до воскресенья
     # weekday() для воскресенья возвращает 6 а не 0
-    # while currentDate.weekday() != 6:
+    # while currentDate.weekday() != 6:  # если делать начало недели с Воскресенья
     while currentDate.weekday() != 0:  # так как неделя начинается с ПН ( это у буржуев с ВС)
         currentDate -= datetime.timedelta(days=1)
 
@@ -74,3 +74,10 @@ def getCalendarFor(year, month):
 
 calText = getCalendarFor(year, month)
 print(calText)
+
+# Сохранить календарь в текстовый файл
+calendarFilename = f'calendar_{year}_{month}.txt'
+with open(calendarFilename, 'w') as fileObj:
+    fileObj.write(calText)
+
+print('Сохранено в ' + calendarFilename)
