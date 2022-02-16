@@ -35,7 +35,38 @@ def getCalendarFor(year, month):
     # Поместить меcяц и год вверху календаря
     calText += (' ' * 34) + MONTH[month - 1] + ' ' + str(year) + '\n'
     # добавить метки дней недели
-    calText += ' Понедельник   Втрорник   Среда    Четверг   Пятница   Суббота   Воскресенье   \n'
+    calText += 'Понедельник  Втрорник   Среда    Четверг    Пятница   Суббота   Воскресенье   \n'
+    # Горизонтальная линия разделитель недель
+    weekSeparator = ('+----------' * 7) + '+\n'
+    # пустые строки по 10 пробелов между разделителями дней |
+    blankRow = ('|          ' * 7) + '|\n'
+    # получить первую дату месяца
+    currentDate = datetime.date(year, month, 1)
+    # отнимаем от currentDate по дню пока не дойдем до воскресенья
+    # weekday() для воскресенья возвращает 6 а не 0
+    while currentDate.weekday() != 6:
+        currentDate -= datetime.timedelta(days=1)
+
+    while True:  # проходим по всем неделям в месяце
+        calText += weekSeparator
+        # dayNumberRow - строка с метками номеров дней
+        dayNumberRow = ''
+        for i in range(7):
+            dayNumberLabel = str(currentDate.day).rjust(2)
+            dayNumberRow += '|' + dayNumberLabel + (' ' * 8)
+            currentDate += datetime.timedelta(days=1)  # переход к следующему дню
+        dayNumberRow += '|\n'  # добавить | после субботы
+        # добавить строку с номерами дней и 3 пустых строки
+        calText += dayNumberRow
+        for i in range(3):      # можно заменить кол-во пустых строк
+            calText += blankRow
+
+        # проверить закончили обработку месяца?
+        if currentDate.month != month:
+            break
+
+    # горизонтальная линия в самом низу календаря
+    calText += weekSeparator
 
     return calText
 
