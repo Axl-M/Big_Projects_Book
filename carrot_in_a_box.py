@@ -81,3 +81,23 @@ print(p2Name + ' , хотите обменяться коробками с ' + p
 
 while True:
     responce = input('> ').upper()
+    if not (responce.startswith('Y') or responce.startswith('N')):
+        print(p2Name + ', введите "YES" или "NO".')
+    else:
+        break
+
+firstBox = 'КРАСНАЯ '
+secondBox = 'ЗОЛОТАЯ'
+
+if responce.startswith('Y'):
+    carrotInFirstBox = not carrotInFirstBox
+    firstBox, secondBox = secondBox, firstBox
+
+print(''' ВОТ ВАШИ КОРОБКИ
+  __________     __________
+ /         /|   /         /|
++---------+ |  +---------+ |''')
+print(f'| {firstBox} | |  | {secondBox}| |')
+print('''| КОРОБКА | /  | КОРОБКА | /
++---------+/   +---------+/''')
+print(playerNames)
