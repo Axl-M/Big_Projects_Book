@@ -7,4 +7,20 @@ description = '''
 
 import sys, time, sevseg
 
-sevseg.getSevSegStr(923, 5)
+# задаем количество времени
+secondsLeft = 7265
+
+try:
+    # while True:
+    print('\n' * 60) # очистка экрана
+
+    # получить часы, минуты, секунды из secondsLeft
+    hours = str(secondsLeft // 3600)
+    minutes = str((secondsLeft % 3600) // 60)
+    seconds = str(secondsLeft % 60)
+
+    print(hours, minutes, seconds)
+
+except KeyboardInterrupt:
+    sys.exit()
+# sevseg.getSevSegStr('9 23.99', 7)
