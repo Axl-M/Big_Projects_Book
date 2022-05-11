@@ -5,4 +5,6 @@ description = '''
 Для останова нажмите Ctrl+C.
 '''
 
-import sys, time, sev
+import sys, time, sevseg
+
+sevseg.getSevSegStr(923, 5)
