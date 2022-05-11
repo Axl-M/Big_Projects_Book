@@ -75,10 +75,10 @@ def getSevSegStr(number, minWidth=0):
             rows[1] += ' '
             rows[2] += ' '
 
-    # return '\n'.join(rows)
+    return '\n'.join(rows)
 
     # print(number)
-    print('\n'.join(rows))
+    # print('\n'.join(rows))
 
 
 if __name__ == '__main__':
