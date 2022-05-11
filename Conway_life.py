@@ -44,7 +44,7 @@ for x in range(WIDTH): # по всем столбцам
 # Основной цикл программы
 # Итерации этого цикла соответствуют шагам моделирования.
 while True:
-    print('\n' * 50) # Разделяем шаги символами новой строки.
+    # print('\n' * 50) # Разделяем шаги символами новой строки. (новый кадр)
     cells = copy.deepcopy(nextCells)
 
     # Выводим клетки на экран:
@@ -97,5 +97,4 @@ while True:
         time.sleep(1)  # Добавляем паузу в 1 секунду, чтобы уменьшить мигание.
     except KeyboardInterrupt:
         print("Conway's Game of Life")
-        print('By Al Sweigart al@inventwithpython.com')
         sys.exit()  # Если нажато Ctrl+C — завершаем программу.
