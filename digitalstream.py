@@ -8,7 +8,7 @@ import random, shutil, sys, time
 MIN_STRING_LENGTH = 6
 MAX_STRING_LENGTH = 14
 PAUSE = 0.1
-STREAM_CHARS = ['0', '1', '#']
+STREAM_CHARS = ['0', '1', '#', '@', '.']
 # Плотность может варьироваться от 0.0 до 1.0:
 DENSITY = 0.02
 # Получаем размер окна терминала:
@@ -28,19 +28,19 @@ try:
     while True:
         # Задаем счетчики для каждого из столбцов:
         for i in range(WIDTH):
-            if columns[i] == 0:
+            if columns[i] == 0:  # столбец закончился
                 if random.random() <= DENSITY:
                     # перезапускаем поток для этого столбца
                     columns[i] = random.randint(MIN_STRING_LENGTH, MAX_STRING_LENGTH)
 
             # выводим пробел или символ 1/0
-            if columns[i] > 0:
+            if columns[i] > 0:  # если столбец не закончился
                 print(random.choice(STREAM_CHARS), end='')
                 columns[i] -= 1
             else:
                 print(' ', end='')
         print()  # новая строка в конце троки столбцов
-        sys.stdout.flush()  # вывести текст на экран
+        sys.stdout.flush()  # вывести текст на экран (нужен ли этот код?)
         time.sleep(PAUSE)
 
 except KeyboardInterrupt:
