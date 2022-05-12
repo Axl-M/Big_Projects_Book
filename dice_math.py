@@ -1,8 +1,10 @@
-'''
+import random
+import time
+
+description = '''
 Выбрасывает от 2 до 6 игральных костей, сумму очков на которых вы должны вычислить так быстро, как только можете.
 Выпавшие верхние (лицевые) стороны костей отображаются в случайных местах на экране.
-'''
-description = '''
+
 Арифметика с игральными костями
 Игра с обучающими карточками на сложение, в которой нужно суммировать все очки на выброшенных игральных костях.
 За 30 секунд необходимо дать как можно больше ответов.
@@ -10,14 +12,12 @@ description = '''
 За каждый неправильный - отнимается 1 балл.
 '''
 
-import random, time
-
 # константы
 DICE_WIDTH = 9
 DICE_HEIGHT = 5
 CANVAS_WIDTH = 79
-CANVAS_HEIGHT = 24 - 3 # -3 чтобы было куда вывести сумму внизу
-QUIZ_DURATION = 30
+CANVAS_HEIGHT = 24 - 3  # -3 чтобы было куда вывести сумму внизу
+QUIZ_DURATION = 0.0001
 MIN_DICE = 2
 MAX_DICE = 6
 REWARD = 4
@@ -82,3 +82,34 @@ D6b = (['+-------+',
 
 ALL_DICE = [D1, D2a, D2b, D3a, D3b, D4, D5, D6a, D6b]
 
+print('''
+Арифметика с игральными костями
+Игра с обучающими карточками на сложение, в которой нужно суммировать все очки на выброшенных игральных костях.
+За {} секунд необходимо дать как можно больше ответов.
+За каждый правильный ответ начисляется {} балла.
+За каждый неправильный - отнимается {} балл.
+'''.format(QUIZ_DURATION, REWARD, PENALTY))
+# input('Press Enter to begin...')
+
+correctAnswer = 0
+incorrectAnswer = 0
+start_time = time.time()
+
+while time.time() < start_time + QUIZ_DURATION:  # основной цикл
+    sumAnswers = 0
+    diceFaces = []
+    # выбрать кость для отображения
+    for i in range(random.randint(MIN_DICE, MAX_DICE)):
+        die = random.choice(ALL_DICE)
+        # die[0] содержит список лицевых сторон костей в виде строк:
+        diceFaces.append(die[0])
+        # die[1] содержит количество точек на лицевой стороне в виде чисел:
+        sumAnswers += die[1]
+
+    print('die[0]')
+    print(die[0])
+    print('die[1]')
+    print(die[1])
+    print('diceFaces')
+    print(diceFaces)
+    print(sumAnswers)
