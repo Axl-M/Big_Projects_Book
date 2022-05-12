@@ -46,6 +46,28 @@ def main():
 
     ducklingLanes = [None] * (WIDTH // DUCKLING_WIDTH)
 
+    while True:  # Основной цикл программы.
+        for laneNum, ducklingObj in enumerate(ducklingLanes):
+            # Проверяем, имеет ли смысл создавать утенка на этой полоске:
+            if (ducklingObj == None and random.random() <= DENSITY):
+                # Размещаем утенка на этой полоске:
+                ducklingObj = Duckling()
+                ducklingLanes[laneNum] = ducklingObj
+
+            if ducklingObj != None:
+                # Если на этой полоске есть утенок — отрисовываем:
+                print(ducklingObj.getNextBodyPart(), end='')
+                # Удаляем утенка по завершении его отрисовки:
+                if ducklingObj.partToDisplayNext == None:
+                    ducklingLanes[laneNum] = None
+            else:
+                # Выводим пять пробелов, раз утенка тут нет.
+                print(' ' * DUCKLING_WIDTH, end='')
+
+        print()
+        sys.stdout.flush()  # Обеспечиваем вывод текста на экран.
+        time.sleep(PAUSE)
+
 
 class Duckling:
     def __init__(self):
