@@ -24,7 +24,7 @@ REWARD = 4
 PENALTY = 1
 
 # Если все кости не помещаются на экране, программа зависает:
-assert MAX_DICE <= 14
+assert MAX_DICE <= 14, 'Большое количество костей'
 
 D1 = (['+-------+',
        '|       |',
@@ -89,7 +89,7 @@ print('''
 За каждый правильный ответ начисляется {} балла.
 За каждый неправильный - отнимается {} балл.
 '''.format(QUIZ_DURATION, REWARD, PENALTY))
-# input('Press Enter to begin...')
+input('Press Enter to begin...')
 
 correctAnswer = 0
 incorrectAnswer = 0
@@ -101,18 +101,10 @@ while time.time() < start_time + QUIZ_DURATION:  # основной цикл
     # выбрать кость для отображения
     for i in range(random.randint(MIN_DICE, MAX_DICE)):
         die = random.choice(ALL_DICE)
-        # die[0] содержит список лицевых сторон костей в виде строк:
+        # die[0] содержит список лицевой стороны кости в виде строк:
         diceFaces.append(die[0])
-        # die[1] содержит количество точек на лицевой стороне в виде чисел:
+        # die[1] содержит количество точек на лицевой стороне в виде числа:
         sumAnswer += die[1]
-
-    # print('die[0]')
-    # print(die[0])
-    # print('die[1]')
-    # print(die[1])
-    # print('diceFaces')
-    # print(diceFaces)
-    # print(sumAnswer)
 
     # Содержит кортежи (x, y) с местоположением верхнего левого угла кости.
     topLeftDiceCorners = []
@@ -181,7 +173,7 @@ while time.time() < start_time + QUIZ_DURATION:  # основной цикл
     # вывод холста на экран
     for cy in range(CANVAS_HEIGHT):
         for cx in range(CANVAS_WIDTH):
-            print(canvas.get((cx, cy), ' '), end='')  # незанятое пространство заполнить пробелами ' '
+            print(canvas.get((cx, cy), ' '), end='')  # если незанято заполнить пробелами ' '
         print()
 
     # даем игроку возможность ввести свой ответ
