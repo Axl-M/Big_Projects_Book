@@ -19,3 +19,48 @@ print('''Dice Roller,
 2d38-1 - бросить две 38-гранных кости и отнять 1 штрафа.
 Q (QUIT) для выхода.
 ''')
+
+while True:
+    try:
+        diceStr = input(' > ')
+        if diceStr.upper() == 'Q':
+            sys.exit()
+
+        # очищаем строку описания игральных костей
+        diceStr = diceStr.lower().replace(' ', '')
+        # ищем "d" в строке описания
+        dIndex = diceStr.find('d')
+        if dIndex == -1:
+            raise Exception('Отсутствует символ "d" ')
+        # выясняем количество костей (число перед 'd')
+        numberOfDice = diceStr[:dIndex]
+        if not numberOfDice.isdecimal():
+            raise Exception('Пропущено количество костей')
+        numberOfDice = int(numberOfDice)
+
+        # Выясняем, присутствует ли модификатор в виде знака плюс или минус:
+        modIndex = diceStr.find('+')
+        if modIndex == -1:
+            modIndex = diceStr.find('-')
+
+        # Выясняем количество граней ("6" в "3d6+1"):
+        if modIndex == -1:
+            numberOfSides = diceStr[dIndex + 1 :]
+        else:
+            numberOfSides = diceStr[dIndex + 1 : modIndex]
+        if not numberOfSides.isdecimal():
+            raise Exception('Пропущено количество сторон.')
+        numberOfSides = int(numberOfSides)
+
+        # Выясняем числовое значение модификатора (The "1" in "3d6+1"):
+        if modIndex == -1:
+            modAmount = 0
+        else:
+            modAmount = int(diceStr[modIndex + 1 :])
+            if diceStr[modIndex] == '-':
+                # Меняем числовое значение модификатора на отрицательное:
+                modAmount = -modAmount
+                
+
+
+
