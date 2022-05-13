@@ -12,7 +12,7 @@ description ="""
 Можете ли вы найти простые числа?
 """
 
-import math, sys
+import math, sys, time
 
 print(description)
 
@@ -20,7 +20,16 @@ while True:
     print('Введите положительное целое число для разложения его на множители или Q для выхода.')
     response = input(' ==> ')
     if response.upper() == 'Q':
-        print('Exiting........\nBye.......')
+        print('Exiting', end='')
+        for i in range(10):
+            print('.', end='')
+            time.sleep(0.3)
+        time.sleep(1)
+        print()
+        for bye in list('Bye!'):
+            print(bye, end='')
+            time.sleep(0.5)
+        print()
         sys.exit()
 
     if not (response.isdecimal() and int(response) > 0):
