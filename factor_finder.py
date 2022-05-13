@@ -20,6 +20,7 @@ while True:
     print('Введите положительное целое число для разложения его на множители или Q для выхода.')
     response = input(' ==> ')
     if response.upper() == 'Q':
+        print('Exiting........\nBye.......')
         sys.exit()
 
     if not (response.isdecimal() and int(response) > 0):
@@ -38,11 +39,15 @@ while True:
     factors = list(set(factors))
     factors.sort()
 
-    # print(factors)
+    prime_number = False
+    if len(factors) == 2:
+        prime_number = True
 
     # вывод результата
     for i, factor in enumerate(factors):
         factors[i] = str(factor)
+    if prime_number:
+        print("ЭТО ПРОСТОЕ ЧИСЛО.\nThan's prime number")
     print(', '.join(factors))
 
 
